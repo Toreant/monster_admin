@@ -5,10 +5,10 @@ import React from 'react';
 import {Router,Route,DefaultRoute} from 'react-router';
 import App from './components/App';
 // 超级用户
-import Super from './../../monster_admin/app/components/Super';
-import SuperArticle from './../../monster_admin/app/components/SuperArticle';
-import SuperUserControl from './../../monster_admin/app/components/SuperUserControl';
-import Statistics from './../../monster_admin/app/components/Statistics';
+import Super from './components/Super';
+import SuperArticle from './components/SuperArticle';
+import SuperUserControl from './components/SuperUserControl';
+import Statistics from './components/Statistics';
 
 export default(
     <Route handler={App}>
