@@ -2,7 +2,7 @@
  * Created by apache on 16-4-1.
  */
 import alt from '../alt';
-import SuperUserControlActions from '../../../monster_admin/app/actions/SuperUserControlActions';
+import SuperUserControlActions from '../actions/SuperUserControlActions';
 
 class SuperUserControlStore {
     constructor() {

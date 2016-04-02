@@ -2,7 +2,7 @@
  * Created by apache on 16-4-1.
  */
 import React from 'react';
-import SuperActions from '../../../monster_admin/app/actions/SuperActions';
+import SuperActions from '../actions/SuperActions';
 import SuperStore from '../stores/SuperStore';
 import {RouteHandler,Link} from 'react-router';
 

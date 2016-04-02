@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Link} from 'react-router';
-import SuperArticleActions from '../../../monster_admin/app/actions/SuperArticleActions';
+import SuperArticleActions from '../actions/SuperArticleActions';
 import SuperArticlesStore from '../stores/SuperArticleStore';
 let config = require('../config');
 

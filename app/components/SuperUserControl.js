@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Link} from 'react-router';
-import SuperUserControlActions from '../../../monster_admin/app/actions/SuperUserControlActions';
+import SuperUserControlActions from '../actions/SuperUserControlActions';
 import SuperUserControlStore from '../stores/SuperUserControlStore';
 let config = require('../config');
 

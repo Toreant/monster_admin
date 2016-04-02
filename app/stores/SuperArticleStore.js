@@ -2,7 +2,7 @@
  * Created by apache on 16-4-1.
  */
 import alt from '../alt';
-import SuperArticleActions from '../../../monster_admin/app/actions/SuperArticleActions';
+import SuperArticleActions from '../actions/SuperArticleActions';
 
 class SuperArticleStore {
     constructor() {

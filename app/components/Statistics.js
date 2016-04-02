@@ -2,7 +2,7 @@
  * Created by apache on 16-4-2.
  */
 import React from 'react';
-import StatisticsActions from '../../../monster_admin/app/actions/StatisticsActions';
+import StatisticsActions from '../actions/StatisticsActions';
 import StatisticsStore from '../stores/StatisticsStore';
 
 class Statistics extends React.Component {
