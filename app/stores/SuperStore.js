@@ -19,7 +19,6 @@ class SuperStore {
     }
 
     onSessionSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             this.logined = true;
         } else {
