@@ -521,18 +521,18 @@ a {
   font-size: 16px;
 }
 .mon-ability-list span.fa {
-  color: #fff;
+  color: #999;
   margin-right: 20px;
 }
 .mon-ability-list a {
-  color: #fff;
+  color: #5e5e5e;
 }
 .mon-ability-list a.active {
+  color: #FF4040;
   font-weight: 800;
-  background-color: grey;
 }
 .mon-ability-list a.active span {
-  color: #43CD80;
+  color: #FF4040;
 }
 .mon-contribute > li {
   border-bottom: 1px dashed #d4d4d4;

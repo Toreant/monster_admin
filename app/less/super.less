@@ -29,6 +29,10 @@
     &:hover {
       background: #999988;
     }
+
+    &>span {
+      color: #fff !important;
+    }
   }
 }
 
@@ -36,6 +40,19 @@
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid #ddd;
+
+  &> div {
+    margin: 20px 0 0 10px;
+
+    &>span {
+      color: #fff;
+
+      &:hover {
+        color: #DDDDDD;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 #admin-img {

@@ -5,6 +5,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import SuperUserControlActions from '../../../monster_admin/app/actions/SuperUserControlActions';
 import SuperUserControlStore from '../stores/SuperUserControlStore';
+let config = require('../config');
 
 class SuperUserControl extends React.Component {
     constructor(props) {
@@ -45,9 +46,9 @@ class SuperUserControl extends React.Component {
                             </div>
                         </div>
                         <div>
-                            <Link to={"/member/"+data.domain}>
+                            <a href={config.url + "/member/"+data.domain}>
                                 {data.username}
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 );

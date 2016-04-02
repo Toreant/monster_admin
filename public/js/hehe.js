@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
 
-    let url = "http://localhost:3000/super";
+    let url = "http://localhost:8080/super";
 
     $("#submit").click(function() {
         var email = $("#email").val(),

@@ -5,6 +5,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import SuperArticleActions from '../../../monster_admin/app/actions/SuperArticleActions';
 import SuperArticlesStore from '../stores/SuperArticleStore';
+let config = require('../config');
 
 class SuperArticle extends React.Component {
     constructor(props) {
@@ -37,14 +38,14 @@ class SuperArticle extends React.Component {
                 return (
                     <div key={data.data._id} id={"article"+data.data._id} className="media mon-control-item animated fadeIn">
                         <div className="media-left">
-                            <Link to={'/article/'+data.data._id}>
-                                <img src={data.data.abbreviations || '/img/cover-night.png'} alt="loading"/>
-                            </Link>
+                            <a href={config.url+data.data._id}>
+                                <img src={(config.url + data.data.abbreviations) || '/img/cover-night.png'} alt="loading"/>
+                            </a>
                         </div>
                         <div className="media-body">
-                            <Link to={'/article/'+data.data._id}>
+                            <a href={config.url+data.data._id}>
                                 {data.data.title || '无'}
-                            </Link>
+                            </a>
                             <p className="text-muted mon-follow-intr">
                                 简介：{data.data.introduce　|| '五'}
                             </p>

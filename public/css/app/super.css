@@ -29,10 +29,23 @@
 .mon-fn > a:hover {
   background: #999988;
 }
+.mon-fn > a > span {
+  color: #fff !important;
+}
 .mon-admin-user {
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid #ddd;
+}
+.mon-admin-user > div {
+  margin: 20px 0 0 10px;
+}
+.mon-admin-user > div > span {
+  color: #fff;
+}
+.mon-admin-user > div > span:hover {
+  color: #DDDDDD;
+  cursor: pointer;
 }
 #admin-img {
   border-radius: 50%;
