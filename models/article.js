@@ -16,6 +16,7 @@ var ArticleSchema = new Schema({
     browser_count : {type : Number,default :0},　// 浏览的次数
     create_user_id : {type : String},　　　　　　　// 创建的用户id
     create_time : {type : Number},              // 创建的时间
+    sticky : {type : Boolean,default : false}
 });
 
 export default mongoose.model('Article',ArticleSchema);

@@ -121,7 +121,7 @@ class md {
      * @param option
      * @param callback
      */
-    getArticles(option,callback,params = {}) {
+    getArticles(option,callback,params) {
 
         this.commonProxy.gets(params,option,callback);
     }
@@ -159,6 +159,53 @@ class md {
 
         this.commonProxy.delete(_id,u,callback);
     }
+
+    /**
+     * 置顶
+     * @param _id 文章id
+     * @param callback　回调函数
+     */
+    setSticky(_id,callback) {
+        this.sticky(0,_id,callback);
+    }
+
+    /**
+     * 取消置顶
+     * @param _id 文章id
+     * @param callback 回调函数
+     */
+    deleteSticky(_id,callback) {
+        this.sticky(1,_id,callback);
+    }
+
+   sticky(option,_id,callback) {
+       Article.findById(_id,(err,data) => {
+           if(err) {
+               callback(500);
+           } else if(option === 0) {
+               // 置顶
+               if(data.sticky) {
+                   callback(303);
+               } else {
+                   data.sticky = true;
+               }
+           } else if(option === 1) {
+               // 取消置顶
+               if(!data.sticky) {
+                   callback(303);
+               } else {
+                   data.sticky = false;
+               }
+           }
+           data.save((err) => {
+               if(err) {
+                   callback(500);
+               } else {
+                   callback(200);
+               }
+           });
+       });
+   }
 }
 
 export default new md();

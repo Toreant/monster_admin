@@ -168,4 +168,9 @@ router.get('/hehe',function(req,res,next) {
     res.render('admin');
 });
 
+// 置顶
+router.get('/api/sticky/:id',ArticleCtrl.setSticky);
+
+router.delete('/api/sticky/:id',ArticleCtrl.deleteSticky);
+
 export default router;

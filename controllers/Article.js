@@ -178,6 +178,61 @@ class ArticleCtrl {
             res.json(result);
         });
     }
+
+    /**
+     * 置顶
+     * @param req
+     * @param res
+     */
+    setSticky(req,res) {
+        let _id = req.params.id,
+            result = {
+                meta : '',
+                code : 0,
+                _id  : _id
+            };
+       article.setSticky(_id,(data) => {
+           if(data === 303) {
+               result.meta = '此文章已经置顶过了';
+               result.code = 303;
+           } else if(data === 500) {
+               result.meta = '服务器错误';
+               result.code = 500;
+           } else {
+               result.meta = '置顶成功';
+               result.code = 200;
+           }
+           res.json(result);
+       });
+    }
+
+    /**
+     * 取消置顶
+     * @param req
+     * @param res
+     */
+    deleteSticky(req,res) {
+        let _id = req.params.id,
+            result = {
+                meta : '',
+                code : 0,
+                _id  : _id
+            };
+        article.deleteSticky(_id,(data) => {
+            if(data === 303) {
+                result.meta = '此文章还没置顶过了';
+                result.code = 303;
+            } else if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '取消置顶成功';
+                result.code = 200;
+            }
+
+            res.json(result);
+        });
+    }
 }
 
 export default new ArticleCtrl();

@@ -6,9 +6,20 @@ $(document).ready(function() {
     let url = "http://114.215.91.5:8080/super";
 
     $("#submit").click(function() {
+        login();
+    });
+
+    $(document).keydown(function(e) {
+        if(e.which == 13) {
+            login();
+        }
+    });
+
+    function login() {
         var email = $("#email").val(),
             password = $("#password").val();
-        var $this = $(this);
+        var $this = $(this),
+            $tip = $(".tip");
 
         $this.attr('disabled','disabled');
         $.ajax({
@@ -23,12 +34,20 @@ $(document).ready(function() {
                 location.href = url;
                 sessionStorage.admin = JSON.stringify(data);
             } else {
-                console.log('hehe');
+                $tip.addClass('fadeIn');
+                $tip.children("#tip-content").css('display','block').text(data.meta);
+                setTimeout(function(){
+                    $tip.removeClass('fadeIn');
+                    $tip.children("#tip-content").css('display','none');
+                },2000);
             }
         }).fail(function() {
-            console.log('hehe');
+            $tip.addClass('fadeIn');
+            $tip.children("#tip-content").css('display','block');
+            setTimeout(function(){
+                $tip.removeClass('fadeIn');
+                $tip.children("#tip-content").css('display','none');
+            },2000);
         });
-    });
-
-
+    }
 });

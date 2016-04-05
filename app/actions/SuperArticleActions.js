@@ -9,7 +9,8 @@ class SuperArticleActions {
             'getArticlesSuccess',
             'getArticlesFail',
             'deleteSuccess',
-            'deleteFail'
+            'deleteFail',
+            'topArticleSuccess'
         );
     }
 
@@ -48,6 +49,21 @@ class SuperArticleActions {
         }).fail(() => {
             this.actions.deleteFail();
         })
+    }
+
+    topArticle(_id,stickied,token) {
+        let type = stickied ? 'delete' : 'get';
+        console.log(type);
+        $.ajax({
+            url : '/api/sticky/'+_id,
+            type : type,
+            cache : false,
+            contentType : 'application/json;charset=utf-8'
+        }).done((data) => {
+            this.actions.topArticleSuccess(data);
+        }).fail(() => {
+            toastr.warning('操作失败');
+        });
     }
 }
 

@@ -31,6 +31,11 @@ class SuperArticle extends React.Component {
         SuperArticleActions.deleteArticle(_id,'');
     }
 
+    topArticle(_id) {
+        console.log($("#sticky"+_id).data('sticky'));
+        SuperArticleActions.topArticle(_id,$("#sticky"+_id).data('sticky'),'');
+    }
+
     render() {
         let ArticleList;
         if(this.state.list.length > 0) {
@@ -39,7 +44,7 @@ class SuperArticle extends React.Component {
                     <div key={data.data._id} id={"article"+data.data._id} className="media mon-control-item animated fadeIn">
                         <div className="media-left">
                             <a href={config.url+data.data._id}>
-                                <img src={(config.url + data.data.abbreviations) || '/img/cover-night.png'} alt="loading"/>
+                                <img src={(config.url + data.data.abbreviations) || '/img/cover-night.png'} alt="loading" width="150" height="100"/>
                             </a>
                         </div>
                         <div className="media-body">
@@ -50,9 +55,13 @@ class SuperArticle extends React.Component {
                                 简介：{data.data.introduce　|| '五'}
                             </p>
                         </div>
-                    <span className="mon-delete" onClick={this.deleteArticle.bind(this,data.data._id)}>
-                        删除
-                    </span>
+
+                        <span className="mon-delete" onClick={this.deleteArticle.bind(this,data.data._id)}>
+                            删除
+                        </span>
+                        <span id={'sticky'+data.data._id} className="mon-btn" data-sticky={data.data.sticky} onClick={this.topArticle.bind(this,data.data._id)}>
+                            {data.data.sticky ? "下放": "置顶"}
+                        </span>
                     </div>
                 );
             });

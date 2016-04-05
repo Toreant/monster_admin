@@ -10,6 +10,7 @@
 
 .mon-admin {
   position: relative;
+  z-index: 1000;
   width: 400px;
   padding: 15px 30px;
   background: #fff;
@@ -53,4 +54,25 @@
 
 .form-actions {
   overflow: hidden;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  font-size: 16rem;
+  text-align: center;
+  z-index: 0;
+
+  & div#tip-content {
+    display: none;
+    text-shadow: 0 0 10px red;
+  }
 }

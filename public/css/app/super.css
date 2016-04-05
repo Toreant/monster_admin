@@ -58,7 +58,8 @@
   padding: 5px 10px;
   position: relative;
 }
-.mon-control-item:hover .mon-delete {
+.mon-control-item:hover .mon-delete,
+.mon-control-item:hover .mon-btn {
   display: inline-block;
 }
 .mon-delete {
@@ -74,6 +75,20 @@
 .mon-delete:hover {
   cursor: pointer;
   background: #FF8C69;
+}
+.mon-btn {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+  display: none;
+  padding: 5px 10px;
+  background: mediumseagreen;
+  color: #fff;
+  border-radius: 4px;
+}
+.mon-btn:hover {
+  cursor: pointer;
+  background: lightgreen;
 }
 /* 用户控制 */
 .mon-user-control {

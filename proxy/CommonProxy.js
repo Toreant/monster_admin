@@ -141,6 +141,7 @@ class CommonProxy {
      */
     gets(params,option,callback) {
         let Model = this.Model;
+        console.log(params);
 
         async.waterfall([
             /*

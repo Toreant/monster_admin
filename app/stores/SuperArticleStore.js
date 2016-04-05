@@ -38,6 +38,16 @@ class SuperArticleStore {
             toastr.error('无法删除');
         }
     }
+
+    onTopArticleSuccess(data) {
+        if(data.code === 200) {
+            var oldVal = $("#sticky"+data._id).data('sticky');
+            $("#sticky"+data._id).data('sticky',!oldVal).text(oldVal?"置顶":'下放');
+            toastr.success(data.meta);
+        } else {
+            toastr.warning(data.meta);
+        }
+    }
 }
 
 export default alt.createStore(SuperArticleStore);
