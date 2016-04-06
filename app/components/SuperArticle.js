@@ -5,7 +5,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import SuperArticleActions from '../actions/SuperArticleActions';
 import SuperArticlesStore from '../stores/SuperArticleStore';
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 let config = require('../config');
 
 class SuperArticle extends React.Component {
