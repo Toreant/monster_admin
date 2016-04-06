@@ -4,6 +4,7 @@
 import alt from '../alt';
 import SuperArticleActions from '../actions/SuperArticleActions';
 import React from 'react';
+import md from 'markdown';
 
 class SuperArticleStore {
     constructor() {
@@ -64,6 +65,44 @@ class SuperArticleStore {
             toastr.success(data.meta);
         } else {
             toastr.warning(data.meta);
+        }
+    }
+
+    onGetSuccess(data) {
+
+        if(data.code === 200) {
+            let target = data.raw.article;
+            let $updateModal = $("#updateModal");
+            $updateModal.on('show.bs.modal',function(event) {
+                var modal = $(this),
+                    tags = target.tags.toString().replace(/,/g,' ');
+                modal.find("input[name='title']").val(target.title);
+                modal.find("textarea[name='summary']").val(target.summary);
+                modal.find("input[name='tag']").val(tags);
+                modal.find("textarea[name='content']").val(target.content);
+                modal.find("input[name='_id']").val(target._id);
+
+                let markdown = md.markdown;
+                $("#updateContent").markdown({
+                    autofocus:false,
+                    savable:false,
+                    onPreview: function(e) {
+                        var previewContent;
+
+                        if (e.isDirty()) {
+                            var originalContent = e.getContent();
+
+                            previewContent = markdown.toHTML(originalContent);
+                        } else {
+                            previewContent = "写下你的大作吧！！！"
+                        }
+                        return previewContent;
+                    }
+                });
+            });
+            $updateModal.modal('show');
+        } else {
+            toastr.warning('获取数据失败');
         }
     }
 }

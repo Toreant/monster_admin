@@ -58,36 +58,25 @@
   padding: 5px 10px;
   position: relative;
 }
-.mon-control-item:hover .mon-delete,
-.mon-control-item:hover .mon-btn {
+.mon-ctr-btn {
   display: inline-block;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 4px;
+}
+.mon-ctr-btn:hover {
+  cursor: pointer;
 }
 .mon-delete {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: none;
-  padding: 5px 10px;
   background: #FF4040;
-  color: #fff;
-  border-radius: 4px;
 }
 .mon-delete:hover {
-  cursor: pointer;
   background: #FF8C69;
 }
-.mon-btn {
-  position: absolute;
-  top: 10px;
-  right: 80px;
-  display: none;
-  padding: 5px 10px;
+.mon-top-btn {
   background: mediumseagreen;
-  color: #fff;
-  border-radius: 4px;
 }
-.mon-btn:hover {
-  cursor: pointer;
+.mon-top-btn:hover {
   background: lightgreen;
 }
 /* 用户控制 */
@@ -111,19 +100,31 @@
 .mon-setting > ul span {
   margin-right: 10px;
 }
-.example-enter {
-  opacity: 0.01;
-  -webkit-transition: opacity 0.5s ease-in;
-          transition: opacity 0.5s ease-in;
+.mon-article-control > div {
+  padding: 10px;
+  float: left;
 }
-.example-enter.example-enter-active {
-  opacity: 1;
+.mon-article-control > div:first-child {
+  width: 75%;
 }
-.example-leave {
-  opacity: 1;
-  -webkit-transition: opacity 0.5s ease-in;
-          transition: opacity 0.5s ease-in;
+.mon-article-control > div:nth-child(2) {
+  width: 25%;
+  text-align: center;
 }
-.example-leave.example-leave-active {
-  display: none;
+.mon-article-control > div:nth-child(2) > button {
+  margin: auto 5px;
+  border: none;
+}
+.mon-ctrl-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.mon-ctrl-content > div {
+  padding: 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }

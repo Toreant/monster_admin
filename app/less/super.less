@@ -66,41 +66,33 @@
   margin: 10px 0;
   padding: 5px 10px;
   position: relative;
+}
 
-  &:hover .mon-delete,
-  &:hover .mon-btn {
-    display: inline-block;
+.mon-ctr-btn {
+  display: inline-block;
+  padding: 5px 10px;
+
+  color: #fff;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+
   }
 }
 
 .mon-delete {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: none;
-  padding: 5px 10px;
   background: #FF4040;
-  color: #fff;
-  border-radius: 4px;
 
   &:hover {
-    cursor: pointer;
     background: #FF8C69;
   }
 }
 
-.mon-btn {
-  position: absolute;
-  top: 10px;
-  right: 80px;
-  display: none;
-  padding: 5px 10px;
+.mon-top-btn {
   background: mediumseagreen;
-  color: #fff;
-  border-radius: 4px;
 
   &:hover {
-    cursor: pointer;
     background: lightgreen;
   }
 }
@@ -132,20 +124,32 @@
   }
 }
 
-.example-enter {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
+.mon-article-control {
+  &>div {
+    padding: 10px;
+    float: left;
+  }
+
+  &>div:first-child {
+    width: 75%;
+  }
+
+  &>div:nth-child(2) {
+    width: 25%;
+    text-align: center;
+
+    &>button {
+      margin: auto 5px;
+      border: none;
+    }
+  }
 }
 
-.example-enter.example-enter-active {
-  opacity: 1;
-}
+.mon-ctrl-content {
+  display: flex;
 
-.example-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
-}
-
-.example-leave.example-leave-active {
-  display: none;
+  &>div {
+    padding: 10px;
+    flex: 1;
+  }
 }

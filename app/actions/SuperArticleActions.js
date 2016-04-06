@@ -10,7 +10,8 @@ class SuperArticleActions {
             'getArticlesFail',
             'deleteSuccess',
             'deleteFail',
-            'topArticleSuccess'
+            'topArticleSuccess',
+            'getSuccess'
         );
     }
 
@@ -64,6 +65,20 @@ class SuperArticleActions {
         }).fail(() => {
             toastr.warning('操作失败');
         });
+    }
+
+    // 更新
+    get(column,_id) {
+        $.ajax({
+            url : '/api/'+column+'/'+_id+'/false',
+            type : 'get',
+            cache : false,
+            contentType : 'application/json;charset=utf-8'
+        }).done((data) => {
+            this.actions.getSuccess(data);
+        }).fail(() => {
+            toastr.warning('获取失败');
+        })
     }
 }
 
