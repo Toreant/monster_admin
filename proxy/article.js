@@ -181,27 +181,27 @@ class md {
    sticky(option,_id,callback) {
        Article.findById(_id,(err,data) => {
            if(err) {
-               callback(500);
+               return callback(500);
            } else if(option === 0) {
                // 置顶
                if(data.sticky) {
-                   callback(303);
+                   return callback(303);
                } else {
                    data.sticky = true;
                }
            } else if(option === 1) {
                // 取消置顶
                if(!data.sticky) {
-                   callback(303);
+                   return callback(303);
                } else {
                    data.sticky = false;
                }
            }
            data.save((err) => {
                if(err) {
-                   callback(500);
+                   return callback(500);
                } else {
-                   callback(200);
+                   return callback(200);
                }
            });
        });

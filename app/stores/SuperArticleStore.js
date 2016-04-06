@@ -3,6 +3,7 @@
  */
 import alt from '../alt';
 import SuperArticleActions from '../actions/SuperArticleActions';
+import React from 'react';
 
 class SuperArticleStore {
     constructor() {
@@ -23,9 +24,16 @@ class SuperArticleStore {
         let data = raw.data,
             _id = raw._id;
         if(data.code === 200) {
-            $("#article"+_id).fadeOut(function() {
-                $(this).remove();
-            });
+            var mutexIndex = -1;
+            for(var i = 0, len = this.list.length; i < len; i++) {
+                if(this.list[i].data._id === _id) {
+                    mutexIndex = i;
+                    break;
+                }
+            }
+            if(mutexIndex !== -1) {
+                this.list = React.addons.update(this.list,{$splice : [[mutexIndex,1]]});
+            }
         } else {
             this.onDeleteFail(data.code);
         }
@@ -41,8 +49,18 @@ class SuperArticleStore {
 
     onTopArticleSuccess(data) {
         if(data.code === 200) {
-            var oldVal = $("#sticky"+data._id).data('sticky');
-            $("#sticky"+data._id).data('sticky',!oldVal).text(oldVal?"置顶":'下放');
+            var mutexIndex = -1,
+                oldVal = false;
+            for(var i = 0,len = this.list.length; i < len; i++) {
+                if(this.list[i].data._id === data._id) {
+                    mutexIndex = i;
+                    oldVal = this.list[i].data.sticky;
+                    break;
+                }
+            }
+            var updateItem = React.addons.update(this.list[mutexIndex],{data : {sticky : {$set : !oldVal}}});
+            this.list = React.addons.update(this.list,{$splice: [[mutexIndex,1,updateItem]]});
+
             toastr.success(data.meta);
         } else {
             toastr.warning(data.meta);
