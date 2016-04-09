@@ -3722,7 +3722,7 @@ webpackJsonp([0],[
 	            if (type === 'title') {
 	                params.title = value;
 	            } else {
-	                params.tags = { $in: [value] };
+	                params.tags = { $in: value.split(/\s/) };
 	            }
 
 	            $.ajax({
@@ -3745,7 +3745,6 @@ webpackJsonp([0],[
 	        value: function changeSearch(e) {
 	            var _this6 = this;
 
-	            console.log(e);
 	            setTimeout(function () {
 	                _this6.actions.changeSearchSuccess(e);
 	            }, 50);

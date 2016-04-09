@@ -89,7 +89,7 @@ class SuperArticleActions {
         if(type === 'title') {
             params.title = value
         } else {
-            params.tags = {$in : [value]}
+            params.tags = {$in : value.split(/\s/)}
         }
 
         $.ajax({
@@ -109,7 +109,6 @@ class SuperArticleActions {
     }
 
     changeSearch(e) {
-        console.log(e);
         setTimeout(() => {
             this.actions.changeSearchSuccess(e);
         },50);
