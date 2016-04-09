@@ -45,9 +45,14 @@ class SuperArticle extends React.Component {
         SuperArticleActions.search(value,type);
     }
 
-    defaultSearch(e,value,type) {
+    defaultSearch(e) {
         if(e.keyCode === 13) {
-            this.search(this.state.searchValue,'title');
+            if(this.state.searchValue !== '') {
+                this.search(this.state.searchValue,'title');
+            } else {
+                console.log('dsad');
+                SuperArticleActions.getArticles(1,'');
+            }
         }
     }
 

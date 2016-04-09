@@ -1328,9 +1328,14 @@ webpackJsonp([0],[
 	        }
 	    }, {
 	        key: 'defaultSearch',
-	        value: function defaultSearch(e, value, type) {
+	        value: function defaultSearch(e) {
 	            if (e.keyCode === 13) {
-	                this.search(this.state.searchValue, 'title');
+	                if (this.state.searchValue !== '') {
+	                    this.search(this.state.searchValue, 'title');
+	                } else {
+	                    console.log('dsad');
+	                    _SuperArticleActions2.default.getArticles(1, '');
+	                }
 	            }
 	        }
 	    }, {
