@@ -6,7 +6,8 @@ import alt from '../alt';
 class SuperMemberActions {
     constructor() {
         this.generateActions(
-            'getMemberSuccess'
+            'getMemberSuccess',
+            'changeSearch'
         );
     }
 
@@ -25,6 +26,8 @@ class SuperMemberActions {
             toastr.warning('获取失败');
         });
     }
+
+
 }
 
 export default alt.createActions(SuperMemberActions);

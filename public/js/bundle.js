@@ -216,15 +216,15 @@ webpackJsonp([0],[
 
 	var _SuperArticle2 = _interopRequireDefault(_SuperArticle);
 
-	var _SuperUserControl = __webpack_require__(213);
+	var _SuperUserControl = __webpack_require__(210);
 
 	var _SuperUserControl2 = _interopRequireDefault(_SuperUserControl);
 
-	var _Statistics = __webpack_require__(216);
+	var _Statistics = __webpack_require__(213);
 
 	var _Statistics2 = _interopRequireDefault(_Statistics);
 
-	var _SuperMember = __webpack_require__(219);
+	var _SuperMember = __webpack_require__(216);
 
 	var _SuperMember2 = _interopRequireDefault(_SuperMember);
 
@@ -240,9 +240,10 @@ webpackJsonp([0],[
 	        _reactRouter.Route,
 	        { path: '/super', handler: _Super2.default },
 	        _react2.default.createElement(_reactRouter.Route, { path: 'article', handler: _SuperArticle2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'member', handler: _SuperUserControl2.default }),
 	        _react2.default.createElement(
 	            _reactRouter.Route,
-	            { path: 'member', handler: _SuperMember2.default },
+	            { path: 'user' },
 	            _react2.default.createElement(_reactRouter.Route, { path: ':domain', handler: _SuperMember2.default })
 	        ),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'statistics', handler: _Statistics2.default }),
@@ -466,8 +467,8 @@ webpackJsonp([0],[
 	                                    'li',
 	                                    null,
 	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { onClick: this.handleClick.bind(this) },
+	                                        _reactRouter.Link,
+	                                        { to: '/super/member' },
 	                                        _react2.default.createElement('span', { className: 'fa fa-users' })
 	                                    )
 	                                ),
@@ -1260,10 +1261,6 @@ webpackJsonp([0],[
 
 	var _SuperArticleStore2 = _interopRequireDefault(_SuperArticleStore);
 
-	var _UpdateBlock = __webpack_require__(210);
-
-	var _UpdateBlock2 = _interopRequireDefault(_UpdateBlock);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1432,9 +1429,14 @@ webpackJsonp([0],[
 	                );
 	            } else {
 	                ArticleList = _addons2.default.createElement(
-	                    'p',
-	                    { key: 'yudha034379847839974hd', className: 'bg-danger mon-padding' },
-	                    '没有数据了'
+	                    'pre',
+	                    { className: 'mon-notice' },
+	                    _addons2.default.createElement('span', { className: 'fa fa-exclamation-triangle ' }),
+	                    _addons2.default.createElement(
+	                        'p',
+	                        null,
+	                        '找不到匹配的选项'
+	                    )
 	                );
 	            }
 
@@ -1443,7 +1445,7 @@ webpackJsonp([0],[
 	                null,
 	                _addons2.default.createElement(
 	                    'div',
-	                    { className: 'mon-article-search' },
+	                    { className: 'mon-search' },
 	                    _addons2.default.createElement(
 	                        'div',
 	                        { className: 'mon-search-block' },
@@ -1477,8 +1479,7 @@ webpackJsonp([0],[
 	                        )
 	                    )
 	                ),
-	                ArticleList,
-	                _addons2.default.createElement(_UpdateBlock2.default, null)
+	                ArticleList
 	            );
 	        }
 	    }]);
@@ -3958,337 +3959,13 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _UpdateBlockActions = __webpack_require__(211);
-
-	var _UpdateBlockActions2 = _interopRequireDefault(_UpdateBlockActions);
-
-	var _UpdateBlockStore = __webpack_require__(212);
-
-	var _UpdateBlockStore2 = _interopRequireDefault(_UpdateBlockStore);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by apache on 15-12-15.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-	var UpdateBlock = (function (_React$Component) {
-	    _inherits(UpdateBlock, _React$Component);
-
-	    function UpdateBlock(props) {
-	        _classCallCheck(this, UpdateBlock);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UpdateBlock).call(this, props));
-
-	        _this.state = _UpdateBlockStore2.default.getState();
-	        _this.onChange = _this.onChange.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(UpdateBlock, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            _UpdateBlockStore2.default.listen(this.onChange);
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            _UpdateBlockStore2.default.unlisten(this.onChange);
-	        }
-	    }, {
-	        key: 'onChange',
-	        value: function onChange(state) {
-	            this.setState(state);
-	        }
-	    }, {
-	        key: 'handleClick',
-	        value: function handleClick() {
-	            var $updateModal = $("#updateModal");
-	            var title = $updateModal.find("input[name='title']").val(),
-	                summary = $updateModal.find("textarea[name='summary']").val(),
-	                tags = $updateModal.find("input[name='tag']").val().replace(/\s+/g, ","),
-	                content = $updateModal.find("textarea[name='content']").val();
-
-	            tags = tags.split(',');
-	            var tag = [];
-	            tags.map(function (data) {
-	                tag.push(data);
-	            });
-
-	            _UpdateBlockActions2.default.update(title, summary, tag, content, $("#_id").val());
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { id: 'updateModal', className: 'modal fade', tabIndex: '-1', role: 'dialog', 'aria-labelledby': 'myModalLabel', 'data-backdrop': 'static' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-dialog' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'modal-content' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'modal-header' },
-	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' },
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    { 'aria-hidden': 'true' },
-	                                    '×'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'h4',
-	                                null,
-	                                '更新'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'modal-body' },
-	                            _react2.default.createElement(
-	                                'form',
-	                                { role: 'form' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2.default.createElement(
-	                                        'p',
-	                                        { className: 'text-info' },
-	                                        '标题'
-	                                    ),
-	                                    _react2.default.createElement('input', { name: 'title', type: 'text', className: 'form-control' })
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2.default.createElement(
-	                                        'p',
-	                                        { className: 'text-info' },
-	                                        '简介'
-	                                    ),
-	                                    _react2.default.createElement('textarea', { name: 'summary', cols: '30', rows: '4', className: 'form-control' })
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2.default.createElement(
-	                                        'p',
-	                                        { className: 'text-info' },
-	                                        '标签'
-	                                    ),
-	                                    _react2.default.createElement('input', { name: 'tag', type: 'text', className: 'form-control' })
-	                                ),
-	                                _react2.default.createElement('input', { id: '_id', type: 'hidden', name: '_id' }),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'form-group' },
-	                                    _react2.default.createElement(
-	                                        'p',
-	                                        { className: 'text-info' },
-	                                        '主体内容'
-	                                    ),
-	                                    _react2.default.createElement('textarea', { id: 'updateContent', name: 'content', cols: '30', rows: '10', className: 'form-control' })
-	                                )
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'modal-footer' },
-	                            _react2.default.createElement(
-	                                'button',
-	                                { className: 'btn btn-primary pull-right', onClick: this.handleClick.bind(this) },
-	                                '保存更新'
-	                            )
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return UpdateBlock;
-	})(_react2.default.Component);
-
-	exports.default = UpdateBlock;
-
-/***/ },
-/* 211 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-15.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _alt = __webpack_require__(163);
-
-	var _alt2 = _interopRequireDefault(_alt);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var UpdateBlockActions = (function () {
-	    function UpdateBlockActions() {
-	        _classCallCheck(this, UpdateBlockActions);
-
-	        this.generateActions('changeTitle', 'changeSummary', 'changeTags', 'changeContent', 'updateSuccess');
-	    }
-
-	    _createClass(UpdateBlockActions, [{
-	        key: 'update',
-	        value: function update(title, summary, tags, content, _id) {
-	            var _this = this;
-
-	            var params = {
-	                params: {
-	                    title: title,
-	                    summary: summary,
-	                    tags: tags,
-	                    content: content
-	                },
-	                _id: _id
-	            };
-
-	            $.ajax({
-	                url: '/api/article',
-	                type: 'put',
-	                dataType: 'json',
-	                contentType: 'application/json;charset=utf-8',
-	                cache: false,
-	                data: JSON.stringify(params)
-	            }).done(function (data) {
-	                _this.actions.updateSuccess(data);
-	            }).fail(function () {
-	                toastr.warning('更新失败');
-	            });
-	        }
-	    }]);
-
-	    return UpdateBlockActions;
-	})();
-
-	exports.default = _alt2.default.createActions(UpdateBlockActions);
-
-/***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-15.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _alt = __webpack_require__(163);
-
-	var _alt2 = _interopRequireDefault(_alt);
-
-	var _UpdateBlockActions = __webpack_require__(211);
-
-	var _UpdateBlockActions2 = _interopRequireDefault(_UpdateBlockActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var UpdateBlockStore = (function () {
-	    function UpdateBlockStore() {
-	        _classCallCheck(this, UpdateBlockStore);
-
-	        this.bindActions(_UpdateBlockActions2.default);
-	        this.title = '';
-	        this.summary = '';
-	        this.tag = [];
-	        this.tags = '';
-	        this.content = '';
-	    }
-
-	    _createClass(UpdateBlockStore, [{
-	        key: 'onChangeTitle',
-	        value: function onChangeTitle(event) {
-
-	            this.title = event.target.value;
-	        }
-	    }, {
-	        key: 'onChangeSummary',
-	        value: function onChangeSummary(event) {
-	            this.summary = event.target.value;
-	        }
-	    }, {
-	        key: 'onChangeTags',
-	        value: function onChangeTags(event) {
-	            var _this = this;
-
-	            var tags = event.target.value.replace(/\s+/g, ",");
-	            tags = tags.split(',');
-	            this.tag = [];
-	            tags.map(function (data) {
-	                _this.tag.push(data);
-	            });
-	        }
-	    }, {
-	        key: 'onChangeContent',
-	        value: function onChangeContent(event) {
-	            this.content = event.target.value;
-	        }
-	    }, {
-	        key: 'onUpdateSuccess',
-	        value: function onUpdateSuccess(data) {
-	            if (data.code === 200) {
-	                toastr.success(data.meta);
-	            } else if (data.code === 500) {
-	                toastr.warning(data.meta);
-	            }
-	        }
-	    }]);
-
-	    return UpdateBlockStore;
-	})();
-
-	exports.default = _alt2.default.createStore(UpdateBlockStore);
-
-/***/ },
-/* 213 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
 	var _reactRouter = __webpack_require__(158);
 
-	var _SuperUserControlActions = __webpack_require__(214);
+	var _SuperUserControlActions = __webpack_require__(211);
 
 	var _SuperUserControlActions2 = _interopRequireDefault(_SuperUserControlActions);
 
-	var _SuperUserControlStore = __webpack_require__(215);
+	var _SuperUserControlStore = __webpack_require__(212);
 
 	var _SuperUserControlStore2 = _interopRequireDefault(_SuperUserControlStore);
 
@@ -4334,62 +4011,163 @@ webpackJsonp([0],[
 	            this.setState(state);
 	        }
 	    }, {
-	        key: 'handleClick',
-	        value: function handleClick() {
-	            $(".mon-canvas").css('transform', 'translateX(100%)');
+	        key: 'ban',
+	        value: function ban(_id, banned) {
+	            _SuperUserControlActions2.default.ban(_id, banned);
+	        }
+	    }, {
+	        key: 'deleteMember',
+	        value: function deleteMember(_id) {}
+	    }, {
+	        key: 'search',
+	        value: function search(value, type) {
+	            _SuperUserControlActions2.default.search(value, type);
+	        }
+	    }, {
+	        key: 'defaultSearch',
+	        value: function defaultSearch(e) {
+	            if (e.keyCode === 13) {
+	                if (this.state.searchValue !== '') {
+	                    this.search(this.state.searchValue, 'username');
+	                } else {
+	                    _SuperUserControlActions2.default.getUsers();
+	                }
+	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var UserList = null;
+	            var _this2 = this;
+
+	            var UserList = null,
+	                searchClass = this.state.searchValue === '' ? 'mon-search-o-result' : 'mon-search-result';
 
 	            if (this.state.list.length > 0) {
 	                UserList = this.state.list.map(function (data) {
 	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: data._id, className: 'animated fadeIn mon-user-control' },
+	                        'div',
+	                        { key: 'member-' + data._id, className: 'media mon-control-item animated fadeIn' },
 	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: "/super/member/" + data.domain },
-	                            _react2.default.createElement('img', { src: data.avatar_url, alt: 'loading' }),
-	                            data.username
+	                            'div',
+	                            { className: 'media-left' },
+	                            _react2.default.createElement(
+	                                _reactRouter.Link,
+	                                { to: '/super/user/' + data.domain },
+	                                _react2.default.createElement('img', { src: config.url + data.avatar_url || '/img/cover-night.png', alt: 'loading', width: '100', height: '100' })
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'media-body mon-article-control' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'mon-ctrl-content' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        _reactRouter.Link,
+	                                        { to: '/super/user/' + data.domain, target: 'blank' },
+	                                        data.username || '无'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'p',
+	                                        { className: 'text-muted mon-follow-intr' },
+	                                        '简介：',
+	                                        data.introduce || '无'
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { className: 'mon-ctr-btn btn-danger', onClick: _this2.deleteMember.bind(_this2, data._id) },
+	                                    '删除'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { className: 'mon-ctr-btn btn-success', onClick: _this2.ban.bind(_this2, data._id, data.ban) },
+	                                    data.ban ? "解禁" : "禁言"
+	                                )
+	                            )
 	                        )
 	                    );
 	                });
+	            } else if (this.state.loading) {
+	                UserList = _react2.default.createElement(
+	                    'div',
+	                    { className: 'loader-inner line-scale-pulse-out mon-loader-o mon-loader-bg' },
+	                    _react2.default.createElement('div', null),
+	                    _react2.default.createElement('div', null),
+	                    _react2.default.createElement('div', null),
+	                    _react2.default.createElement('div', null),
+	                    _react2.default.createElement('div', null)
+	                );
+	            } else {
+	                UserList = _react2.default.createElement(
+	                    'pre',
+	                    { className: 'mon-notice' },
+	                    _react2.default.createElement('span', { className: 'fa fa-exclamation-triangle ' }),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '找不到匹配的选项'
+	                    )
+	                );
 	            }
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'animated fadeIn' },
+	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'mon-user-block' },
+	                    { className: 'mon-search' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'mon-user-close' },
-	                        _react2.default.createElement(
-	                            'p',
-	                            { className: 'mon-padding-title' },
-	                            '用户'
-	                        ),
-	                        _react2.default.createElement('span', { className: 'fa fa-times', onClick: this.handleClick.bind(this) })
+	                        { className: 'mon-search-block' },
+	                        _react2.default.createElement('label', { htmlFor: 'search-user', className: 'fa fa-search' }),
+	                        _react2.default.createElement('input', { id: 'search-user', className: 'form-control', value: this.searchValue, onChange: _SuperUserControlActions2.default.changeSearch, onKeyDown: this.defaultSearch.bind(this), type: 'text', placeholder: '输入关键字，姓名或邮箱' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'mon-user-search' },
+	                        { id: 'search-users', className: searchClass },
 	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'search' },
-	                            _react2.default.createElement('span', { className: 'fa fa-search' })
-	                        ),
-	                        _react2.default.createElement('input', { id: 'search', className: 'form-control', type: 'text' })
+	                            'ul',
+	                            { className: 'nav' },
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'javascript:void(0);', onClick: this.search.bind(this, this.state.searchValue, 'username') },
+	                                    _react2.default.createElement('span', { className: 'fa fa-user mon-icon' }),
+	                                    '根据用户名“',
+	                                    this.state.searchValue,
+	                                    '”查找'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'javascript:void(0);', onClick: this.search.bind(this, this.state.searchValue, 'email') },
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'mon-icon' },
+	                                        '@'
+	                                    ),
+	                                    '根据邮箱根据邮箱“',
+	                                    this.state.searchValue,
+	                                    '”查找'
+	                                )
+	                            )
+	                        )
 	                    )
 	                ),
-	                _react2.default.createElement(
-	                    'ul',
-	                    { className: 'nav' },
-	                    UserList
-	                )
+	                UserList
 	            );
 	        }
 	    }]);
@@ -4400,7 +4178,7 @@ webpackJsonp([0],[
 	exports.default = SuperUserControl;
 
 /***/ },
-/* 214 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4425,7 +4203,7 @@ webpackJsonp([0],[
 	    function SuperUserControlActions() {
 	        _classCallCheck(this, SuperUserControlActions);
 
-	        this.generateActions('getUsersSuccess', 'getUsersFail');
+	        this.generateActions('getUsersSuccess', 'getUsersFail', 'changeSearch', 'searchUserSuccess', 'banSuccess');
 	    }
 
 	    _createClass(SuperUserControlActions, [{
@@ -4445,6 +4223,56 @@ webpackJsonp([0],[
 	                _this.actions.getUsersFail();
 	            });
 	        }
+	    }, {
+	        key: 'ban',
+	        value: function ban(_id, banned) {
+	            var _this2 = this;
+
+	            $.ajax({
+	                url: '/api/member/ban',
+	                type: 'post',
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                cache: true,
+	                timeOut: 10000,
+	                data: JSON.stringify({
+	                    _id: _id,
+	                    ban: !banned
+	                })
+	            }).done(function (data) {
+	                _this2.actions.banSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('操作失败');
+	            });
+	        }
+	    }, {
+	        key: 'deleteMember',
+	        value: function deleteMember(_id) {}
+	    }, {
+	        key: 'search',
+	        value: function search(value, type) {
+	            var _this3 = this;
+
+	            var params = {};
+	            params[type] = value;
+
+	            $.ajax({
+	                url: '/api/users/search',
+	                type: 'post',
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                cache: true,
+	                timeOut: 10000,
+	                data: JSON.stringify({ params: params, option: {} })
+	            }).done(function (data) {
+	                console.log(data);
+	                _this3.actions.searchUserSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('查询失败');
+	            });
+
+	            $("#search-users").removeClass('mon-search-result').addClass('mon-search-o-result');
+	        }
 	    }]);
 
 	    return SuperUserControlActions;
@@ -4453,7 +4281,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(SuperUserControlActions);
 
 /***/ },
-/* 215 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4470,9 +4298,13 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _SuperUserControlActions = __webpack_require__(214);
+	var _SuperUserControlActions = __webpack_require__(211);
 
 	var _SuperUserControlActions2 = _interopRequireDefault(_SuperUserControlActions);
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4484,6 +4316,8 @@ webpackJsonp([0],[
 
 	        this.bindActions(_SuperUserControlActions2.default);
 	        this.list = [];
+	        this.loading = false;
+	        this.searchValue = '';
 	    }
 
 	    _createClass(SuperUserControlStore, [{
@@ -4505,6 +4339,45 @@ webpackJsonp([0],[
 	                toastr.warning('获取数据失败');
 	            }
 	        }
+	    }, {
+	        key: 'onChangeSearch',
+	        value: function onChangeSearch(e) {
+	            this.searchValue = e.target.value;
+	        }
+	    }, {
+	        key: 'onSearchUserSuccess',
+	        value: function onSearchUserSuccess(data) {
+	            if (data.code === 500) {
+	                toastr.error(data.meta);
+	            } else if (data.code === 200) {
+	                this.list = _react2.default.addons.update(this.list, { $set: data.raw });
+	            }
+	        }
+	    }, {
+	        key: 'onBanSuccess',
+	        value: function onBanSuccess(data) {
+	            console.log(data);
+	            if (data.code === 200) {
+	                var index = -1;
+	                for (var i = 0, num = this.list.length; i < num; i++) {
+	                    if (this.list[i]._id === data._id) {
+	                        index = i;
+	                        break;
+	                    }
+	                }
+
+	                if (index !== -1) {
+	                    console.log("eehh");
+	                    this.newItem = _react2.default.addons.update(this.list[index], { ban: { $set: data.ban } });
+
+	                    this.list = _react2.default.addons.update(this.list, { $splice: [[index, 1, this.newItem]] });
+	                } else {
+	                    toastr.warning('找不到这个人');
+	                }
+	            } else {
+	                toastr.warning(data.meta);
+	            }
+	        }
 	    }]);
 
 	    return SuperUserControlStore;
@@ -4513,7 +4386,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(SuperUserControlStore);
 
 /***/ },
-/* 216 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4528,11 +4401,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StatisticsActions = __webpack_require__(217);
+	var _StatisticsActions = __webpack_require__(214);
 
 	var _StatisticsActions2 = _interopRequireDefault(_StatisticsActions);
 
-	var _StatisticsStore = __webpack_require__(218);
+	var _StatisticsStore = __webpack_require__(215);
 
 	var _StatisticsStore2 = _interopRequireDefault(_StatisticsStore);
 
@@ -4591,7 +4464,7 @@ webpackJsonp([0],[
 	exports.default = Statistics;
 
 /***/ },
-/* 217 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4619,7 +4492,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(StatisticsActions);
 
 /***/ },
-/* 218 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4632,7 +4505,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _StatisticsActions = __webpack_require__(217);
+	var _StatisticsActions = __webpack_require__(214);
 
 	var _StatisticsActions2 = _interopRequireDefault(_StatisticsActions);
 
@@ -4651,7 +4524,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(StatisticsStore);
 
 /***/ },
-/* 219 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4666,15 +4539,15 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SuperMemberActions = __webpack_require__(220);
+	var _SuperMemberActions = __webpack_require__(217);
 
 	var _SuperMemberActions2 = _interopRequireDefault(_SuperMemberActions);
 
-	var _SuperMemberStore = __webpack_require__(221);
+	var _SuperMemberStore = __webpack_require__(218);
 
 	var _SuperMemberStore2 = _interopRequireDefault(_SuperMemberStore);
 
-	var _Loading = __webpack_require__(222);
+	var _Loading = __webpack_require__(219);
 
 	var _Loading2 = _interopRequireDefault(_Loading);
 
@@ -4768,7 +4641,7 @@ webpackJsonp([0],[
 	exports.default = SuperMember;
 
 /***/ },
-/* 220 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4793,7 +4666,7 @@ webpackJsonp([0],[
 	    function SuperMemberActions() {
 	        _classCallCheck(this, SuperMemberActions);
 
-	        this.generateActions('getMemberSuccess');
+	        this.generateActions('getMemberSuccess', 'changeSearch');
 	    }
 
 	    _createClass(SuperMemberActions, [{
@@ -4822,7 +4695,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(SuperMemberActions);
 
 /***/ },
-/* 221 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4839,7 +4712,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _SuperMemberActions = __webpack_require__(220);
+	var _SuperMemberActions = __webpack_require__(217);
 
 	var _SuperMemberActions2 = _interopRequireDefault(_SuperMemberActions);
 
@@ -4856,7 +4729,7 @@ webpackJsonp([0],[
 	        this.name = "";
 	        this.domain = "";
 	        this._id = "";
-	        this.loading = true;
+	        this.loading = false;
 	    }
 
 	    _createClass(SuperMemberStore, [{
@@ -4881,7 +4754,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(SuperMemberStore);
 
 /***/ },
-/* 222 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

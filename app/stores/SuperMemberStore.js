@@ -11,7 +11,7 @@ class SuperMemberStore {
         this.name = "";
         this.domain = "";
         this._id = "";
-        this.loading = true;
+        this.loading = false;
     }
 
     onGetMemberSuccess(data) {

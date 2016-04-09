@@ -22,7 +22,8 @@ var UserSchema = new Schema({
     animate : [String],
     music : [String],
     notice : [String], // 未读通知
-    approve : [String] // 点赞或踩过的对象
+    approve : [String], // 点赞或踩过的对象
+    ban : {type: Boolean,default: false} // 是否禁言
 });
 
 UserSchema.index({email: 1}, {unique: true});

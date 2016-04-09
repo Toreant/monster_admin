@@ -5,7 +5,6 @@ import React from 'react/addons';
 import {Link} from 'react-router';
 import SuperArticleActions from '../actions/SuperArticleActions';
 import SuperArticlesStore from '../stores/SuperArticleStore';
-import UpdateBlock from './UpdateBlock';
 let config = require('../config');
 
 class SuperArticle extends React.Component {
@@ -115,16 +114,17 @@ class SuperArticle extends React.Component {
             );
         } else {
             ArticleList = (
-                <p key="yudha034379847839974hd" className="bg-danger mon-padding">
-                    没有数据了
-                </p>
+                <pre className="mon-notice">
+                    <span className="fa fa-exclamation-triangle "></span>
+                    <p>找不到匹配的选项</p>
+                </pre>
             );
         }
 
 
         return (
             <div>
-                <div className="mon-article-search">
+                <div className="mon-search">
                     <div className="mon-search-block">
                         <label htmlFor="article-search" className="fa fa-search">
                         </label>
@@ -144,7 +144,6 @@ class SuperArticle extends React.Component {
                     </div>
                 </div>
                 {ArticleList}
-                <UpdateBlock />
             </div>
         );
     }

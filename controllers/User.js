@@ -230,7 +230,6 @@ class UserCtrl {
         };
 
         User.getUsers(skip,(data) => {
-            console.log(data);
             if(data === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
@@ -242,6 +241,57 @@ class UserCtrl {
 
             res.json(result);
         });
+    }
+
+    _getUsers(req,res) {
+        let params = req.body.params,
+            option = req.body.option;
+
+        let result = {
+            meta : '',
+            code : 0,
+            raw  : null
+        };
+
+        User.getUser(params,(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '查询成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+
+            res.json(result);
+        },option);
+    }
+
+    setBan(req,res) {
+        let setTarget = req.body._id,
+            ban = req.body.ban;
+
+        let result = {
+            meta : '',
+            code : 0,
+            _id  : setTarget,
+            ban  : ban
+        };
+
+        User.setBan(setTarget,ban,(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+            } else if(data === 304) {
+                result.meta = ban ? "当前用户已经被禁言了" : "当前用户还没被禁言";
+            } else if(data === 404) {
+                result.meta = '找不到当前用户';
+            } else {
+                result.meta = ban ? "禁言成功" : "解禁成功";
+            }
+            result.code = data;
+            res.json(result);
+        })
+
     }
 
     /**

@@ -33,6 +33,8 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
+router.post('/api/users/search',UserCtrl._getUsers);
+
 router.get('/api/users/:skip',UserCtrl.getUsers);
 
 router.get('/api/profile',auth.isAuth,UserCtrl.getProfile);
@@ -40,6 +42,8 @@ router.get('/api/profile',auth.isAuth,UserCtrl.getProfile);
 router.get('/api/profile/center',auth.isAuth,UserCtrl.getProfileCenter);
 
 router.get('/api/member/:domain',UserCtrl.getUserByDomain);
+
+router.post('/api/member/ban',UserCtrl.setBan);
 
 //　follow有关
 router.post('/api/follow',auth.isAuth,UserCtrl.addFollow);

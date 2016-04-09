@@ -70,12 +70,13 @@ class md {
 
     /**
      * 通过用户名查找
-     * @param name
+     * @param where
      * @param callback
+     * @param option
      */
-    getUser(where,callback) {
-        User.find(where,this.query, (err, docs) => {
-            if (err) callback(err);
+    getUser(where,callback,option = {}) {
+        User.find(where,this.query,option, (err, docs) => {
+            if (err) callback(500);
             else callback(docs);
         });
     }
@@ -621,6 +622,51 @@ class md {
         ],(err,result) => {
             callback(result);
         });
+    }
+
+    /**
+     * 设置用户禁言
+     * @param _id
+     * @param ban
+     * @param callback
+     */
+    setBan(_id,ban,callback) {
+        async.waterfall([
+            function(_callback) {
+                User.findById(_id,(err,user) => {
+                    if(err) {
+                        return callback(500);
+                    } else if(user === null) {
+                        return callback(404);
+                    } else {
+                        _callback(null,user);
+                    }
+                });
+            },
+
+            function(user,_callback) {
+                console.log(user);
+                if(ban === user.ban) {
+                    // 要改的状态和原有的状态一致，不修改
+                    return callback(304);
+                } else {
+                    user.ban = ban;
+                    user.save((err) => {
+                        if(err) {
+                            return callback(500);
+                        } else {
+                            _callback(200);
+                        }
+                    });
+                }
+            }
+        ],function(err,result) {
+            if(err) {
+                return callback(500);
+            } else {
+                return callback(200);
+            }
+        })
     }
 }
 

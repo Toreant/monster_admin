@@ -67,9 +67,9 @@ class Nav extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <a onClick={this.handleClick.bind(this)}>
+                                    <Link to="/super/member">
                                         <span className="fa fa-users"></span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="dropdown">
                                     <a href="#" className="mon-user-nav dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

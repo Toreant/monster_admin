@@ -1,7 +1,7 @@
 /**
  * Created by apache on 16-4-9.
  */
-.mon-article-search {
+.mon-search {
     position: relative;
 }
 
@@ -14,6 +14,10 @@
     background: #fff;
     box-shadow: 0 0 10px #999;
     z-index: 9999;
+
+    & a {
+        color: #999 !important;
+    }
 }
 
 .mon-search-o-result {
@@ -36,4 +40,25 @@
     &>input {
         padding-left: 30px;
     }
+}
+
+.mon-notice {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+
+    &>span {
+        font-size: 10rem;
+        color: #999580;
+    }
+
+    &>p {
+        text-align: center;
+        color: #999988;
+    }
+}
+
+.mon-icon {
+    color: #999;
+    margin-right: 10px;
 }

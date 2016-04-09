@@ -15,7 +15,8 @@ export default(
     <Route handler={App}>
         <Route path="/super" handler={Super}>
             <Route path="article" handler={SuperArticle} />
-            <Route path="member" handler={SuperMember}>
+            <Route path="member" handler={SuperUserControl} />
+            <Route path="user">
                 <Route path=":domain" handler={SuperMember}/>
             </Route>
             <Route path="statistics" handler={Statistics}/>
