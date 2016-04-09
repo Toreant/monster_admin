@@ -115,6 +115,29 @@ class ArticleCtrl {
         },user);
     }
 
+    _getArticles(req,res) {
+        let params = req.body.params,
+            option = req.body.option;
+
+        let result = {
+            meta : '',
+            code : 0,
+            data : null
+        };
+
+        article.getArticles(option,(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '查找成功';
+                result.code = 200;
+                result.data = data;
+            }
+            res.json(result);
+        },params);
+    }
+
     /**
      * 删除文章
      */

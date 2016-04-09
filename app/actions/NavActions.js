@@ -13,7 +13,8 @@ class NavActions {
             'signOutFail',
             'getProfileLocal',
             'searchSuccess',
-            'changeSearch'
+            'changeSearch',
+            'setProfileLocal'
         );
     }
 
@@ -59,6 +60,27 @@ class NavActions {
         }).fail(() => {
             toastr.warning('网络有问题');
         });
+    }
+
+    getProfile() {
+        let localStorage = window.localStorage;
+
+        if(localStorage.getItem('profile') != null) {
+            setTimeout(() => {
+                this.actions.setProfileLocal(localStorage.getItem('profile'));
+            },50);
+        } else {
+            $.ajax({
+                url : '/api/session',
+                type : 'post',
+                contentType : 'application/json;charset=utf-8',
+                timeOut: 10000
+            }).done((data) => {
+                this.actions.setProfileLocal(data.data);
+            }).fail(() => {
+                toastr.warning('获取信息失败');
+            });
+        }
     }
 }
 

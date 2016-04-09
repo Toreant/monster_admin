@@ -10,7 +10,8 @@
 }
 
 .mon-block {
-  margin-left: 200px;
+  margin-left: 300px;
+  padding: 20px;
 }
 
 .mon-fn {
@@ -18,13 +19,14 @@
   z-index: 0;
   left: 0;
   top: 50px;
-  width: 150px;
+  width: 250px;
   height: 100%;
-  background: #515151;
+  background: #fff;
+  border-right: 1px solid #ddd;
 
   &>a {
-    color: #fff !important;
-    border-bottom: none;
+    color: slategray !important;
+    border-bottom: 1px solid #ddd;
 
     &:hover {
       background: #999988;
@@ -64,7 +66,7 @@
 .mon-control-item {
   border: 1px solid #DDDDDD;
   margin: 10px 0;
-  padding: 5px 10px;
+  padding: 5px 20px;
   position: relative;
 }
 
@@ -97,16 +99,67 @@
   }
 }
 
+.mon-canvas {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 50px;
+  transform: translateX(100%);
+  background: #fff;
+  box-shadow: 0 0 10px #ddd;
+  transition: all linear 0.2s;
+}
+
+.mon-user-block {
+  overflow: hidden;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+
+  & input {
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    padding-left: 25px;
+    outline: none;
+  }
+}
+
+.mon-user-close {
+  position: relative;
+
+  &>span {
+    position: absolute;
+    padding: 5px;
+    top: 0;
+    right: 0;
+    color: #999;
+    float: right;
+    border-radius: 50%;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+}
+
+.mon-user-search {
+  position: relative;
+
+  &>label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    line-height: 34px;
+    height: 34px;
+  }
+}
+
 /* 用户控制 */
 .mon-user-control {
-  border: 1px solid #999580;
-  margin: 10px 20px;
+  border-bottom: 1px solid #ddd;
   overflow: visible !important;
-
-  &>div {
-    padding: 2px;
-    width: 100%;
-  }
+  padding: 10px;
+  width: 100%;
 
   & img {
     width: 4rem;
@@ -131,11 +184,11 @@
   }
 
   &>div:first-child {
-    width: 75%;
+    width: 70%;
   }
 
   &>div:nth-child(2) {
-    width: 25%;
+    width: 30%;
     text-align: center;
 
     &>button {
@@ -152,4 +205,22 @@
     padding: 10px;
     flex: 1;
   }
+}
+
+.example-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+
+.example-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
 }

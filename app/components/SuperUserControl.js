@@ -27,40 +27,46 @@ class SuperUserControl extends React.Component {
         this.setState(state);
     }
 
+    handleClick() {
+        $(".mon-canvas").css('transform','translateX(100%)');
+    }
+
     render() {
         let UserList = null;
 
         if(this.state.list.length > 0) {
             UserList = this.state.list.map((data) => {
                 return (
-                    <div key={data._id} className="col-md-2 animated fadeIn mon-user-control">
-                        <div>
+                    <li key={data._id} className="animated fadeIn mon-user-control">
+                        <Link to={"/super/member/"+data.domain}>
                             <img src={data.avatar_url} alt="loading"/>
-                            <div className="btn-group mon-setting">
-                                <span className="fa fa-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#"><span className="fa fa-ban"></span>禁言</a></li>
-                                    <li><a href="#"><span className="fa fa-envelope"></span>私信</a></li>
-                                    <li><a href="#"><span className="fa fa-user-times"></span>删除</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <a href={config.url + "/member/"+data.domain}>
-                                {data.username}
-                            </a>
-                        </div>
-                    </div>
+                            {data.username}
+                        </Link>
+                    </li>
                 );
             });
         }
 
         return (
-            <div>
-                <p className="mon-bg-title mon-padding-title">
-                    用户管理
-                </p>
-                {UserList}
+            <div className="animated fadeIn">
+                <div className="mon-user-block">
+                    <div className="mon-user-close">
+                        <p className="mon-padding-title">
+                            用户
+                        </p>
+                        <span className="fa fa-times" onClick={this.handleClick.bind(this)}></span>
+                    </div>
+                    <div className="mon-user-search">
+                        <label htmlFor="search">
+                            <span className="fa fa-search"></span>
+                        </label>
+                        <input id="search" className="form-control" type="text"/>
+                    </div>
+                </div>
+                <ul className="nav">
+                    {UserList}
+                </ul>
+
             </div>
         );
     }

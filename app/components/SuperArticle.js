@@ -1,7 +1,7 @@
 /**
  * Created by apache on 16-4-1.
  */
-import React from 'react';
+import React from 'react/addons';
 import {Link} from 'react-router';
 import SuperArticleActions from '../actions/SuperArticleActions';
 import SuperArticlesStore from '../stores/SuperArticleStore';
@@ -40,8 +40,21 @@ class SuperArticle extends React.Component {
         SuperArticleActions.get('article',_id);
     }
 
+    search(value,type) {
+        SuperArticleActions.setLoading();
+        SuperArticleActions.search(value,type);
+    }
+
+    defaultSearch(e,value,type) {
+        if(e.keyCode === 13) {
+            this.search(this.state.searchValue,'title');
+        }
+    }
+
     render() {
         let ArticleList;
+        let cs = React.addons.classSet;
+        let searchClass = this.state.searchValue !== '' ? 'mon-search-result' : 'mon-search-o-result';
         if(this.state.list.length > 0) {
             ArticleList = this.state.list.map((data) => {
                 return (
@@ -85,6 +98,16 @@ class SuperArticle extends React.Component {
                     </div>
                 );
             });
+        } else if(this.state.loading) {
+            ArticleList = (
+                <div className='loader-inner line-scale-pulse-out mon-loader-o mon-loader-bg'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            );
         } else {
             ArticleList = (
                 <p key="yudha034379847839974hd" className="bg-danger mon-padding">
@@ -96,9 +119,25 @@ class SuperArticle extends React.Component {
 
         return (
             <div>
-                <p className="mon-bg-title mon-padding-title">
-                    文章管理
-                </p>
+                <div className="mon-article-search">
+                    <div className="mon-search-block">
+                        <label htmlFor="article-search" className="fa fa-search">
+                        </label>
+                        <input id="article-search" className="form-control" onChange={SuperArticleActions.changeSearchSuccess} onKeyDown={this.defaultSearch.bind(this)} type="text" placeholder="输入关键字，题目或标签"/>
+                    </div>
+                    <div id="search-result" className={searchClass}>
+                        <ul className="nav">
+                            <li>
+                                <a href="javascript:void(0);" onClick={this.search.bind(this,this.state.searchValue,'title')}>
+                                    文章标题中查找“{this.state.searchValue}"
+                                </a>
+                                <a href="javascript:void(0);" onClick={this.search.bind(this,this.state.searchValue,'tag')}>
+                                    文章标签中查找“{this.state.searchValue}"
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 {ArticleList}
                 <UpdateBlock />
             </div>

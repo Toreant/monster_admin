@@ -115,17 +115,41 @@ a {
   font-size: 30px;
 }
 .mon-nav {
-  position: relative;
-  background-color: #fafafa;
+  background-color: #393c40;
+  width: 100%;
 }
+
+.mon-nav>ul {
+  width: 100%;
+}
+
+.mon-nav span {
+  font-size: 1.5rem;
+  color: lightgray;
+}
+
+.mon-nav a {
+  color: #fff !important;
+}
+
+.mon-nav a:hover,
+.mon-nav a:hover span {
+  color: grey !important;
+}
+
 .mon-subnav {
   text-align: center;
+  margin-right: 20px !important;
 }
 .mon-user-nav {
   padding: 10px 15px !important;
 }
 .mon-subnav img {
   border-radius: 50%;
+}
+
+.mon-subnav a {
+  color: dimgray !important;
 }
 .mon-user > span:first-child {
   color: #ddd;

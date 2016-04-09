@@ -33,6 +33,7 @@ $(document).ready(function() {
             if(data.code === 200) {
                 location.href = url;
                 sessionStorage.admin = JSON.stringify(data);
+                window.localStorage.setItem('profile',JSON.stringify(data.data));
             } else {
                 $tip.addClass('fadeIn');
                 $tip.children("#tip-content").css('display','block').text(data.meta);

@@ -61,6 +61,8 @@ router.get('/api/article/:id/:transform?',ArticleCtrl.getArticle);
 
 router.post('/api/articles',ArticleCtrl.getArticles);
 
+router.post('/api/articles/search',ArticleCtrl._getArticles);
+
 router.put('/api/article',auth.isAuth,ArticleCtrl.updateArticle);
 
 router.delete('/api/article/:id',auth.isAuth,ArticleCtrl.deleteArticle);

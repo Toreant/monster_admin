@@ -9,15 +9,17 @@ import Super from './components/Super';
 import SuperArticle from './components/SuperArticle';
 import SuperUserControl from './components/SuperUserControl';
 import Statistics from './components/Statistics';
+import SuperMember from './components/SuperMember';
 
 export default(
     <Route handler={App}>
         <Route path="/super" handler={Super}>
             <Route path="article" handler={SuperArticle} />
-            <Route path="member" handler={SuperUserControl}>
-                <Route path=":skip" handler={SuperUserControl}/>
+            <Route path="member" handler={SuperMember}>
+                <Route path=":domain" handler={SuperMember}/>
             </Route>
             <Route path="statistics" handler={Statistics}/>
+            <Route path="search" handler={Statistics}/>
             <DefaultRoute handler={SuperArticle}/>
         </Route>
     </Route>

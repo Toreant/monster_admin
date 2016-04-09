@@ -105,7 +105,7 @@ gulp.task('vendor', function() {
 gulp.task('webpack',function() {
     return gulp.src(['app/main.js'])
         .pipe(webpack(require('./webpack.config.js')))
-        .pipe(gulpif(!production , uglify({mangle : false})))
+        //.pipe(gulpif(!production , uglify({mangle : false})))
         .pipe(gulp.dest('public/js'));
 });
 

@@ -28,7 +28,7 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {
-            'react': pathToReact,
+            //'react': pathToReact,
             'react-router': path.resolve(node_modules,'react-router/umd/ReactRouter.min')
         }
     },

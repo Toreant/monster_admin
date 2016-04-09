@@ -11,7 +11,10 @@ class SuperArticleActions {
             'deleteSuccess',
             'deleteFail',
             'topArticleSuccess',
-            'getSuccess'
+            'getSuccess',
+            'changeSearchSuccess',
+            'searchArticleSuccess',
+            'setLoading'
         );
     }
 
@@ -79,6 +82,37 @@ class SuperArticleActions {
         }).fail(() => {
             toastr.warning('获取失败');
         })
+    }
+
+    search(value,type) {
+        let params = {};
+        if(type === 'title') {
+            params.title = value
+        } else {
+            params.tags = {$in : [value]}
+        }
+
+        $.ajax({
+            url : '/api/articles/search',
+            dataType : 'json',
+            contentType : 'application/json;charset=utf-8',
+            cache : true,
+            type : 'post',
+            data : JSON.stringify({params : params,option : {}})
+        }).done((data) => {
+            this.actions.searchArticleSuccess(data);
+        }).fail(() => {
+            this.actions.getArticlesFail();
+        });
+
+        $("#search-result").removeClass('mon-search-result').addClass('mon-search-o-result');
+    }
+
+    changeSearch(e) {
+        console.log(e);
+        setTimeout(() => {
+            this.actions.changeSearchSuccess(e);
+        },50);
     }
 }
 

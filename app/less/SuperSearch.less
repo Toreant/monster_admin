@@ -1,0 +1,39 @@
+/**
+ * Created by apache on 16-4-9.
+ */
+.mon-article-search {
+    position: relative;
+}
+
+.mon-search-result {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 10px #999;
+    z-index: 9999;
+}
+
+.mon-search-o-result {
+    display: none;
+}
+
+.mon-search-block {
+    position: relative;
+
+    &>label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: 34px;
+        height: 34px;
+        margin-left: 10px;
+        color: #ddd;
+    }
+
+    &>input {
+        padding-left: 30px;
+    }
+}

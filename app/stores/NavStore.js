@@ -62,6 +62,15 @@ class NavStore {
         this.search = event.target.value;
         console.log(this.search);
     }
+
+    onSetProfileLocal(data) {
+        data = JSON.parse(data);
+        console.log(data);
+        this.avatar = data.avatar_url;
+        this.userName = data.username;
+        this.loginState = true;
+        console.log(this.avatar);
+    }
 }
 
 export default alt.createStore(NavStore);
