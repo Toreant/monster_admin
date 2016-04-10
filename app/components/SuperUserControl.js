@@ -53,6 +53,7 @@ class SuperUserControl extends React.Component {
         let UserList = null,
             searchClass = this.state.searchValue === '' ? 'mon-search-o-result': 'mon-search-result';
 
+
         if(this.state.list.length > 0) {
             UserList = this.state.list.map((data) => {
                 return (
@@ -109,7 +110,7 @@ class SuperUserControl extends React.Component {
                 <div className="mon-search">
                     <div className="mon-search-block">
                         <label htmlFor="search-user" className="fa fa-search"></label>
-                        <input id="search-user" className="form-control" value={this.searchValue} onChange={SuperUserControlActions.changeSearch} onKeyDown={this.defaultSearch.bind(this)} type="text" placeholder="输入关键字，姓名或邮箱"/>
+                        <input id="search-user" className="form-control" value={this.searchValue} onChange={SuperUserControlActions.changeSearch} onKeyDown={this.defaultSearch.bind(this)}/>
                     </div>
                     <div id="search-users" className={searchClass}>
                         <ul className="nav">
@@ -119,7 +120,7 @@ class SuperUserControl extends React.Component {
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" onClick={this.search.bind(this,this.state.searchValue,'email')}>
+                                <a href="javascript:void(0);" onClick={this.search.bind(this,this.state.searchValue,'tags')}>
                                     <span className="mon-icon">@</span>根据邮箱根据邮箱“{this.state.searchValue}”查找
                                 </a>
                             </li>
@@ -132,4 +133,4 @@ class SuperUserControl extends React.Component {
     }
 }
 
-export default SuperUserControl;
+export default SuperUserControl

@@ -22,7 +22,6 @@ class SuperUserControlActions {
             dataType : 'json',
             cache : false
         }).done((data) => {
-            console.log(data);
             this.actions.getUsersSuccess(data);
         }).fail(() => {
             this.actions.getUsersFail();
@@ -66,7 +65,6 @@ class SuperUserControlActions {
             timeOut : 10000,
             data : JSON.stringify({params : params,option : {}})
         }).done((data) => {
-            console.log(data);
             this.actions.searchUserSuccess(data);
         }).fail(() => {
             toastr.warning('查询失败')

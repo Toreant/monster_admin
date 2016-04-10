@@ -228,11 +228,13 @@ webpackJsonp([0],[
 
 	var _SuperMember2 = _interopRequireDefault(_SuperMember);
 
+	var _Message = __webpack_require__(220);
+
+	var _Message2 = _interopRequireDefault(_Message);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	/**
-	 * Created by apache on 15-10-23.
-	 */
+	// 超级用户
 	exports.default = _react2.default.createElement(
 	    _reactRouter.Route,
 	    { handler: _App2.default },
@@ -248,10 +250,12 @@ webpackJsonp([0],[
 	        ),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'statistics', handler: _Statistics2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'search', handler: _Statistics2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'message', handler: _Message2.default }),
 	        _react2.default.createElement(_reactRouter.DefaultRoute, { handler: _SuperArticle2.default })
 	    )
-	);
-	// 超级用户
+	); /**
+	    * Created by apache on 15-10-23.
+	    */
 
 /***/ },
 /* 160 */
@@ -431,6 +435,15 @@ webpackJsonp([0],[
 	                                    'a',
 	                                    { href: _config2.default.url + "articles" },
 	                                    '文章'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _reactRouter.Link,
+	                                    { to: '/message' },
+	                                    '发送通知'
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -4128,7 +4141,7 @@ webpackJsonp([0],[
 	                        'div',
 	                        { className: 'mon-search-block' },
 	                        _react2.default.createElement('label', { htmlFor: 'search-user', className: 'fa fa-search' }),
-	                        _react2.default.createElement('input', { id: 'search-user', className: 'form-control', value: this.searchValue, onChange: _SuperUserControlActions2.default.changeSearch, onKeyDown: this.defaultSearch.bind(this), type: 'text', placeholder: '输入关键字，姓名或邮箱' })
+	                        _react2.default.createElement('input', { id: 'search-user', className: 'form-control', value: this.searchValue, onChange: _SuperUserControlActions2.default.changeSearch, onKeyDown: this.defaultSearch.bind(this) })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -4153,7 +4166,7 @@ webpackJsonp([0],[
 	                                null,
 	                                _react2.default.createElement(
 	                                    'a',
-	                                    { href: 'javascript:void(0);', onClick: this.search.bind(this, this.state.searchValue, 'email') },
+	                                    { href: 'javascript:void(0);', onClick: this.search.bind(this, this.state.searchValue, 'tags') },
 	                                    _react2.default.createElement(
 	                                        'span',
 	                                        { className: 'mon-icon' },
@@ -4217,7 +4230,6 @@ webpackJsonp([0],[
 	                dataType: 'json',
 	                cache: false
 	            }).done(function (data) {
-	                console.log(data);
 	                _this.actions.getUsersSuccess(data);
 	            }).fail(function () {
 	                _this.actions.getUsersFail();
@@ -4265,7 +4277,6 @@ webpackJsonp([0],[
 	                timeOut: 10000,
 	                data: JSON.stringify({ params: params, option: {} })
 	            }).done(function (data) {
-	                console.log(data);
 	                _this3.actions.searchUserSuccess(data);
 	            }).fail(function () {
 	                toastr.warning('查询失败');
@@ -4807,6 +4818,391 @@ webpackJsonp([0],[
 	})(_react2.default.Component);
 
 	exports.default = Loading;
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _addons = __webpack_require__(185);
+
+	var _addons2 = _interopRequireDefault(_addons);
+
+	var _MessageActions = __webpack_require__(221);
+
+	var _MessageActions2 = _interopRequireDefault(_MessageActions);
+
+	var _MessageStore = __webpack_require__(222);
+
+	var _MessageStore2 = _interopRequireDefault(_MessageStore);
+
+	var _underscore = __webpack_require__(223);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by apache on 16-4-10.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var Message = (function (_React$Component) {
+	    _inherits(Message, _React$Component);
+
+	    function Message(props) {
+	        _classCallCheck(this, Message);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Message).call(this, props));
+
+	        _this.state = _MessageStore2.default.getState();
+	        _this.onChange = _this.onChange.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Message, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            _MessageStore2.default.listen(this.onChange);
+	            _MessageActions2.default.getUser();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            _MessageStore2.default.unlisten(this.onChange);
+	        }
+	    }, {
+	        key: 'onChange',
+	        value: function onChange(state) {
+	            this.setState(state);
+	        }
+	    }, {
+	        key: 'getUser',
+	        value: function getUser() {
+	            $("#userlist").modal('show');
+	        }
+	    }, {
+	        key: 'select',
+	        value: function select(_id) {
+	            _MessageActions2.default.select(_id);
+	        }
+	    }, {
+	        key: 'post',
+	        value: function post() {
+	            _MessageActions2.default.postNotice(this.state.selectedList, this.state.content, this.state.selectAll);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var UserList = null,
+	                selectedList = this.state.selectedList;
+	            if (this.loading) {
+	                UserList = _addons2.default.createElement(
+	                    'div',
+	                    { className: 'spinnerC' },
+	                    _addons2.default.createElement('div', { className: 'bounce1' }),
+	                    _addons2.default.createElement('div', { className: 'bounce1' }),
+	                    _addons2.default.createElement('div', { className: 'bounce1' })
+	                );
+	            } else if (this.state.list.length <= 0) {
+	                UserList = _addons2.default.createElement(
+	                    'pre',
+	                    { className: 'mon-notice' },
+	                    _addons2.default.createElement('span', { className: 'fa fa-exclamation-triangle ' }),
+	                    _addons2.default.createElement(
+	                        'p',
+	                        null,
+	                        '找不到匹配的选项'
+	                    )
+	                );
+	            } else {
+	                UserList = this.state.list.map(function (data) {
+	                    var selectClass = _underscore2.default.indexOf(selectedList, data._id) === -1 ? 'fa-plus-square' : 'fa-minus-square';
+	                    return _addons2.default.createElement(
+	                        'li',
+	                        { key: "user-" + data._id, className: 'mon-user-item' },
+	                        _addons2.default.createElement('img', { src: data.avatar_url, alt: 'loading', width: '40', height: '40' }),
+	                        data.username,
+	                        _addons2.default.createElement('span', { className: 'fa pull-right ' + selectClass, onClick: _this2.select.bind(_this2, data._id) })
+	                    );
+	                });
+	            }
+
+	            return _addons2.default.createElement(
+	                'div',
+	                null,
+	                _addons2.default.createElement(
+	                    'p',
+	                    { className: 'mon-bg-title mon-padding' },
+	                    '发送通知'
+	                ),
+	                _addons2.default.createElement(
+	                    'ul',
+	                    { className: 'nav' },
+	                    UserList
+	                ),
+	                _addons2.default.createElement(
+	                    'a',
+	                    { href: 'javascript:void(0);', className: 'pull-right btn btn-success', onClick: this.getUser.bind(this) },
+	                    '确定'
+	                ),
+	                _addons2.default.createElement(
+	                    'div',
+	                    { className: 'mon-select-all pull-right' },
+	                    _addons2.default.createElement('input', { type: 'checkbox', name: 'all', onChange: _MessageActions2.default.selectAll }),
+	                    ' 全选'
+	                ),
+	                _addons2.default.createElement(
+	                    'div',
+	                    { id: 'userlist', className: 'modal' },
+	                    _addons2.default.createElement(
+	                        'div',
+	                        { className: 'modal-dialog' },
+	                        _addons2.default.createElement(
+	                            'div',
+	                            { className: 'modal-content' },
+	                            _addons2.default.createElement(
+	                                'div',
+	                                { className: 'modal-header' },
+	                                _addons2.default.createElement(
+	                                    'button',
+	                                    { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' },
+	                                    _addons2.default.createElement(
+	                                        'span',
+	                                        { 'aria-hidden': 'true' },
+	                                        '×'
+	                                    )
+	                                ),
+	                                _addons2.default.createElement(
+	                                    'h4',
+	                                    null,
+	                                    '用户列表'
+	                                )
+	                            ),
+	                            _addons2.default.createElement(
+	                                'div',
+	                                { className: 'modal-body' },
+	                                _addons2.default.createElement(
+	                                    'form',
+	                                    null,
+	                                    _addons2.default.createElement('textarea', { name: 'content', className: 'form-control', value: this.state.content, onChange: _MessageActions2.default.changeContent, cols: '30', rows: '10' })
+	                                )
+	                            ),
+	                            _addons2.default.createElement(
+	                                'div',
+	                                { className: 'modal-footer' },
+	                                _addons2.default.createElement(
+	                                    'button',
+	                                    { className: 'btn btn-primary pull-right', onClick: this.post.bind(this), 'data-dismiss': 'modal', 'aria-label': 'Close' },
+	                                    '发送'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Message;
+	})(_addons2.default.Component);
+
+	exports.default = Message;
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 16-4-10.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(163);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var MessageActions = (function () {
+	    function MessageActions() {
+	        _classCallCheck(this, MessageActions);
+
+	        this.generateActions('postNoticeSuccess', 'getUserSuccess', 'changeContent', 'selectSuccess', 'selectAll');
+	    }
+
+	    _createClass(MessageActions, [{
+	        key: 'getUser',
+	        value: function getUser(query) {
+	            var _this = this;
+
+	            $.ajax({
+	                url: '/api/users/search',
+	                type: 'post',
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                data: JSON.stringify({ params: query, option: {} })
+	            }).done(function (data) {
+	                _this.actions.getUserSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('获取用户失败');
+	            });
+	        }
+	    }, {
+	        key: 'postNotice',
+	        value: function postNotice(queryId, content, all) {
+	            var _this2 = this;
+
+	            console.log(all);
+
+	            var query = {};
+
+	            if (!all && Object.prototype.toString.call(queryId) === '[object Array]' && queryId.length > 0) {
+	                // 选中一批用户发送
+	                query._id = { $in: queryId };
+	            } else if (!all) {
+	                toastr.warning('你还没有选择用户');
+	                return;
+	            }
+
+	            $.ajax({
+	                url: '/api/notice/all',
+	                type: 'post',
+	                dataType: 'json',
+	                contentType: 'application/json;chatset=utf-8',
+	                cache: false,
+	                data: JSON.stringify({ query: query, content: { content: content, create_time: Date.now(), type: 0 } }),
+	                timeOut: 10000
+	            }).done(function (data) {
+	                console.log(data);
+	                _this2.actions.postNoticeSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('发送失败');
+	            });
+	        }
+	    }, {
+	        key: 'select',
+	        value: function select(_id) {
+	            var _this3 = this;
+
+	            setTimeout(function () {
+	                _this3.actions.selectSuccess(_id);
+	            }, 50);
+	        }
+	    }]);
+
+	    return MessageActions;
+	})();
+
+	exports.default = _alt2.default.createActions(MessageActions);
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 16-4-10.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(163);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _MessageActions = __webpack_require__(221);
+
+	var _MessageActions2 = _interopRequireDefault(_MessageActions);
+
+	var _addons = __webpack_require__(185);
+
+	var _addons2 = _interopRequireDefault(_addons);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var MessageStore = (function () {
+	    function MessageStore() {
+	        _classCallCheck(this, MessageStore);
+
+	        this.bindActions(_MessageActions2.default);
+	        this.list = [];
+	        this.selectedList = [];
+	        this.selectAll = false;
+	        this.content = '';
+	        this.loading = false;
+	    }
+
+	    _createClass(MessageStore, [{
+	        key: 'onGetUserSuccess',
+	        value: function onGetUserSuccess(data) {
+	            this.loading = true;
+	            if (data.code === 200) {
+	                this.list = data.raw;
+	            } else {
+	                toastr.warning(data.meta);
+	            }
+	        }
+	    }, {
+	        key: 'onPostNoticeSuccess',
+	        value: function onPostNoticeSuccess(data) {
+	            if (data.code === 200) {
+	                toastr.success(data.meta);
+	            } else {
+	                toastr.warning(data.meta);
+	            }
+	        }
+	    }, {
+	        key: 'onChangeContent',
+	        value: function onChangeContent(e) {
+	            this.content = e.target.value;
+	        }
+	    }, {
+	        key: 'onSelectSuccess',
+	        value: function onSelectSuccess(_id) {
+	            var index = this.selectedList.indexOf(_id);
+	            if (index !== -1) {
+	                this.selectedList = _addons2.default.addons.update(this.selectedList, { $splice: [[index, 1]] });
+	            } else {
+	                this.selectedList = _addons2.default.addons.update(this.selectedList, { $push: [_id] });
+	            }
+	        }
+	    }, {
+	        key: 'onSelectAll',
+	        value: function onSelectAll(e) {
+	            console.log(this.selectAll);
+	            this.selectAll = !this.selectAll;
+	        }
+	    }]);
+
+	    return MessageStore;
+	})();
+
+	exports.default = _alt2.default.createStore(MessageStore);
 
 /***/ }
 ]);

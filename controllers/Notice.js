@@ -46,8 +46,6 @@ class NoticeCtrl {
             receiver = params.receiver,
             user = req.session.user;
 
-        console.log(receiver);
-
         params.create_user_id = user._id;
 
         let result = {
@@ -62,6 +60,32 @@ class NoticeCtrl {
                 result.meta = '私信的用户不存在';
             } else {
                 result.meta = '发送私信成功';
+            }
+            result.code = data;
+            res.json(result);
+        });
+    }
+
+    postNoticeAll(req,res) {
+        let body = req.body,
+            query = body.query,
+            content = body.content,
+            sentId  = req.session.user._id;
+
+        content.create_user_id = sentId;
+
+        let result = {
+            meta : '',
+            code : 0
+        };
+
+        Notice.postNoticeAll(query,content,(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+            } else if(data === 404) {
+                result.meta = '用户找不到';
+            } else {
+                result.meta = '发送成功';
             }
             result.code = data;
             res.json(result);

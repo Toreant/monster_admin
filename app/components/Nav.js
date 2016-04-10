@@ -50,6 +50,11 @@ class Nav extends React.Component {
                         <ul className='nav navbar-nav'>
                             <li><a href={config.url}>monster</a></li>
                             <li><a href={config.url + "articles"}>文章</a></li>
+                            <li>
+                                <Link to="/message">
+                                    发送通知
+                                </Link>
+                            </li>
                             <ul className="nav navbar-nav navbar-right mon-subnav">
                                 <li>
                                     <Link to="/super/search">

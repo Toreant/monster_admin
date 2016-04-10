@@ -155,6 +155,39 @@ class md {
         });
     }
 
+    postNoticeAll(query,content,callback) {
+        async.waterfall([
+
+            function(_callback) {
+                let notice = new Notice(content);
+                notice.save((err,product,raw) => {
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,product._id);
+                    }
+                });
+            },
+
+            function(_id,_callback) {
+                User.update(query,{$push : {notice : _id}},{multi : true},(err,raws) => {
+                    console.log(raws);
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,raws);
+                    }
+                });
+            }
+        ],function(err,_callback) {
+            if(err) {
+                return callback(500);
+            } else {
+                return callback(200);
+            }
+        });
+    }
+
     /**
      * 查看通知
      * @param user 查看的用户

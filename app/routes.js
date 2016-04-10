@@ -10,6 +10,7 @@ import SuperArticle from './components/SuperArticle';
 import SuperUserControl from './components/SuperUserControl';
 import Statistics from './components/Statistics';
 import SuperMember from './components/SuperMember';
+import Message from './components/Message';
 
 export default(
     <Route handler={App}>
@@ -21,6 +22,7 @@ export default(
             </Route>
             <Route path="statistics" handler={Statistics}/>
             <Route path="search" handler={Statistics}/>
+            <Route path="message" handler={Message} />
             <DefaultRoute handler={SuperArticle}/>
         </Route>
     </Route>

@@ -162,6 +162,8 @@ router.get('/api/notice/:id',auth.isAuth,NoticeCtrl.viewNotice);
 
 router.post('/api/notice',auth.isAuth,NoticeCtrl.postNotice);
 
+router.post('/api/notice/all',auth.isAuth,NoticeCtrl.postNoticeAll);
+
 // 帮助
 router.get('/api/weather',Helper.getWeather);
 
